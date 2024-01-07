@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.request.ImageRequest
@@ -48,7 +49,7 @@ import kotlinx.coroutines.flow.StateFlow
 //}
 
 @Composable
-fun IngredientCard(item: IngredientModel) {
+public fun IngredientCard(item: IngredientModel) {
     Row(
         modifier = Modifier
             .height(12.dp)
@@ -58,7 +59,7 @@ fun IngredientCard(item: IngredientModel) {
         ConstraintLayout (
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(1.dp)
+                .padding(12.dp)
         ) {
             val (title, ingredients) = createRefs()
             Text(

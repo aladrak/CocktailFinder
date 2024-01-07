@@ -48,7 +48,9 @@ class DetailsFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?
     ) {
-
+//        setContent {
+//            RecipeScreen.IngredientCard()
+//        }
     }
 
     override fun onCreateView (
@@ -77,14 +79,14 @@ class DetailsFragment : Fragment() {
 //            result?.let {
 //                binding!!.name.setText(result.title ?: "")
 //                binding!!.ingredients.setText(result.ingredients ?: "")
-////                binding!!.measure.setText(result.measure ?: "")
+//                binding!!.measure.setText(result.measure ?: "")
 //                binding!!.instruction.setText(result.instruction)
 //            }
         }
-        it.name.setText(title ?: "")
+//        it.name.setText(title ?: "")
 //        it.ingredients.setText(ing ?: "")
 //        it.measure.setText(mea ?: "")
-        it.instruction.setText(ins)
+//        it.instruction.setText(ins)
 
 //        floatbtnCreate.setOnClickListener {
 //            val item = ListItemViewModel(0, title.text.toString(), description.text.toString())

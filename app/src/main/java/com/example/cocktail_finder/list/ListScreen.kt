@@ -7,11 +7,11 @@ import androidx.compose.runtime.Composable
 //
 //}
 
-private fun
-        setContent {
-            MaterialTheme(
-                Id (
-                    args = smth
-                )
-            )
-        }
+//private fun Recipe
+//        setContent {
+//            MaterialTheme(
+//                Id (
+//                    args = smth
+//                )
+//            )
+//        }
