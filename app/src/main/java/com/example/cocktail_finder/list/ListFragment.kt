@@ -19,11 +19,11 @@ class ListFragment() : Fragment() {
 
     private var ingSearch: Boolean = false
 
-    private val adapter = ListAdapter() {id, title, img, ing, mea, ins ->
+    private val adapter = ListAdapter() {item ->
         requireActivity()
             .supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, DetailsFragment.openFragment(id, title, img, ing, mea, ins))
+            .replace(R.id.container, DetailsFragment.openFragment(item))
             .addToBackStack(DetailsFragment::class.java.canonicalName)
             .commit()
     }

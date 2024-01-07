@@ -13,6 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.cocktail_finder.CocktailRepository
 import com.example.cocktail_finder.R
 import com.example.cocktail_finder.dataModels.IngredientModel
+import com.example.cocktail_finder.dataModels.ListViewModel
 import com.example.cocktail_finder.databinding.CocktailFragmentBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +27,8 @@ class DetailsFragment : Fragment() {
 
     private var binding : CocktailFragmentBinding? = null
 
+//    private val item: ListViewModel?
+//        get() = arguments.
     private val title: String?
         get() = arguments?.getString(TITLE_KEY)
 
@@ -48,9 +51,9 @@ class DetailsFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?
     ) {
-//        setContent {
-//            RecipeScreen.IngredientCard()
-//        }
+        setContent {
+            IngredientCard()
+        }
     }
 
     override fun onCreateView (
@@ -73,7 +76,7 @@ class DetailsFragment : Fragment() {
             .skipMemoryCache(true)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(it.img)
-        var result: IngredientModel?
+        var result: ListViewModel?
         scope.launch {
             result = repository.searchCocktailById(id)
 //            result?.let {
@@ -104,6 +107,7 @@ class DetailsFragment : Fragment() {
 
     companion object {
 
+        const val ITEM_KEY = "ITEM_KEY"
         const val TITLE_KEY = "TITLE_KEY"
         const val IMG_KEY = "IMG_KEY"
         const val INGREDIENTS_KEY = "INGREDIENTS_KEY"
@@ -111,15 +115,10 @@ class DetailsFragment : Fragment() {
         const val INSTRUCTION_KEY = "INSTRUCTION_KEY"
         const val ID_KEY = "ID_KEY"
 
-        fun openFragment(id: String, title: String, img: String, ingred: String, mea: String, instr: String): Fragment {
+        fun openFragment(item: ListViewModel): Fragment {
             val fragment = DetailsFragment()
             val bundle = bundleOf(
-                ID_KEY to id,
-                TITLE_KEY to title,
-                IMG_KEY to img,
-                INGREDIENTS_KEY to ingred,
-                MEASURE_KEY to mea,
-                INSTRUCTION_KEY to instr)
+                ITEM_KEY = item)
             fragment.arguments = bundle
             return fragment
         }

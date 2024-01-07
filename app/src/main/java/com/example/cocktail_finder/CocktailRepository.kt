@@ -26,11 +26,7 @@ class CocktailRepository {
                     resultList.add(
                         ListViewModel(
                             item.getString("idDrink"),
-                            item.getString("strDrink"),
-                            item.getString("strDrinkThumb"),
-                            createIngredients(item),
-                            createMeasure(item),
-                            item.getString("strInstructions")
+                            item.getString("strDrink")
                         )
                     )
                 }
@@ -38,11 +34,7 @@ class CocktailRepository {
                 resultList.add(
                     ListViewModel(
                         "",
-                        "No results!",
-                        "",
-                        "",
-                        "",
-                        "Nothing here."
+                        "No results!"
                     )
                 )
             }
@@ -69,11 +61,7 @@ class CocktailRepository {
                     resultList.add(
                         ListViewModel(
                             item.getString("idDrink"),
-                            item.getString("strDrink"),
-                            item.getString("strDrinkThumb"),
-                            createIngredients(item),
-                            createMeasure(item),
-                            item.getString("strInstructions")
+                            item.getString("strDrink")
                         )
                     )
                 }
@@ -81,11 +69,7 @@ class CocktailRepository {
                 resultList.add(
                     ListViewModel(
                         "",
-                        "No results!",
-                        "",
-                        "",
-                        "",
-                        "Nothing here."
+                        "No results!"
                     )
                 )
             }
@@ -112,6 +96,7 @@ class CocktailRepository {
                     title = item.getString("strDrink"),
                     img = item.getString("strDrinkThumb"),
                     ingredients = createIngredients(item),
+                    measure = createMeasure(item),
                     instruction = item.getString("strInstructions")
                 )
             }

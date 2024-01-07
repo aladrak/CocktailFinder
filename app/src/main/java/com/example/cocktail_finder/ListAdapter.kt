@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cocktail_finder.dataModels.IngredientModel
 import com.example.cocktail_finder.dataModels.ListViewModel
 import com.example.cocktail_finder.databinding.ListItemBinding
 import kotlinx.coroutines.CoroutineScope
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ListAdapter (
-    private val onButtonClick : (id: String, title: String, img: String, ing: String, mea: String, ins: String) -> Unit
+    private val onButtonClick : (item: ListViewModel) -> Unit
 ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     private val list = mutableListOf<ListViewModel>()
@@ -35,7 +36,7 @@ class ListAdapter (
         init {
             cocktailItem.setOnClickListener {
                 val item = list[adapterPosition];
-                onButtonClick(item.id, item.title, item.img, item.ingredients, item.measure, item.instructions)
+                onButtonClick(item)
                 Toast.makeText(
                     cocktailItem.context,
                     cocktailItem.text.toString(),
