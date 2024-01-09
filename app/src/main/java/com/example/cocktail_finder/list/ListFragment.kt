@@ -13,13 +13,13 @@ import com.example.cocktail_finder.ListAdapter
 import com.example.cocktail_finder.R
 import com.example.cocktail_finder.databinding.ListFragmentBinding
 
-class ListFragment() : Fragment() {
+class ListFragment : Fragment() {
 
     private var binding: ListFragmentBinding? = null
 
     private var ingSearch: Boolean = false
 
-    private val adapter = ListAdapter() {item ->
+    private val adapter = ListAdapter {item ->
         requireActivity()
             .supportFragmentManager
             .beginTransaction()

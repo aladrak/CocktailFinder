@@ -64,7 +64,6 @@
 
             <androidx.compose.ui.platform.ComposeView
                 android:id="@+id/recipe_compose_view"
-                tools:composableName="com.example.cocktail_finder.recipe.RecipeScreenKt.IngredientCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/instruction"

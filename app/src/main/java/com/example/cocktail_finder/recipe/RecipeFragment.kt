@@ -1,9 +1,12 @@
 package com.example.cocktail_finder.recipe
 
 import android.os.Bundle
+import android.provider.Contacts
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import coil.ImageLoader
@@ -12,11 +15,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.cocktail_finder.CocktailRepository
 import com.example.cocktail_finder.R
+import com.example.cocktail_finder.dataModels.DetailsModel
 import com.example.cocktail_finder.dataModels.IngredientModel
 import com.example.cocktail_finder.dataModels.ListViewModel
 import com.example.cocktail_finder.databinding.CocktailFragmentBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class DetailsFragment : Fragment() {
@@ -29,33 +36,19 @@ class DetailsFragment : Fragment() {
 
 //    private val item: ListViewModel?
 //        get() = arguments.
-    private val title: String?
-        get() = arguments?.getString(TITLE_KEY)
-
-    private val img: String?
-        get() = arguments?.getString(IMG_KEY)
-
-    private val ing: String?
-        get() = arguments?.getString(INGREDIENTS_KEY)
-
-    private val mea: String?
-        get() = arguments?.getString(MEASURE_KEY)
-
-    private val ins: String?
-        get() = arguments?.getString(INSTRUCTION_KEY)
-
     private val id: String?
         get() = arguments?.getString(ID_KEY)
 
-    override fun onViewCreated (
-        view: View,
-        savedInstanceState: Bundle?
-    ) {
-        setContent {
-            IngredientCard()
-        }
-    }
-
+//    override fun onViewCreated (
+//        view: View,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        binding = CocktailFragmentBinding.inflate(inflater, container, false)
+//        setContent {
+//            IngredientCard()
+//        }
+//        return view
+//    }
     override fun onCreateView (
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -68,24 +61,32 @@ class DetailsFragment : Fragment() {
                 add(ImageDecoderDecoder.Factory())
             }
             .build()
-
-        Glide.with(it.img)
-            .load(img)
-            .override(400, 400)
-            .placeholder(R.drawable.__loading)
-            .skipMemoryCache(true)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .into(it.img)
-        var result: ListViewModel?
+        var result: DetailsModel? = null
         scope.launch {
             result = repository.searchCocktailById(id)
-//            result?.let {
-//                binding!!.name.setText(result.title ?: "")
-//                binding!!.ingredients.setText(result.ingredients ?: "")
-//                binding!!.measure.setText(result.measure ?: "")
-//                binding!!.instruction.setText(result.instruction)
-//            }
+            result?.let {
+                binding!!.name.text = result!!.title ?: ""
+    //                binding!!.ingredients.setText(result.ingredients ?: "")
+    //                binding!!.measure.setText(result.measure ?: "")
+    //                binding!!.instruction.setText(result.instruction)
+                binding!!.recipeComposeView.setContent {
+                    IngredientsList(list = result!!.ingredients)
+                }
+            }
         }
+//        it.recipeComposeView.setContent {
+//            getData()?.let { it1 -> IngredientsList(it1.ingredients) }
+//        }
+
+//        Glide.with(result.img)
+//            .load(img)
+//            .override(400, 400)
+//            .placeholder(R.drawable.__loading)
+//            .skipMemoryCache(true)
+//            .diskCacheStrategy(DiskCacheStrategy.NONE)
+//            .into(it.img)
+
+
 //        it.name.setText(title ?: "")
 //        it.ingredients.setText(ing ?: "")
 //        it.measure.setText(mea ?: "")
@@ -103,7 +104,23 @@ class DetailsFragment : Fragment() {
 //            requireActivity().supportFragmentManager.popBackStack()
 ////            parentFragmentManager.popBackStack()
 //        }
+
     }.root
+
+    fun getData(): DetailsModel? {
+        var result: DetailsModel? = null
+        scope.launch {
+            result = repository.searchCocktailById(id)
+            result?.let {
+                binding!!.name.text = result!!.title ?: ""
+//                binding!!.ingredients.setText(result.ingredients ?: "")
+//                binding!!.measure.setText(result.measure ?: "")
+//                binding!!.instruction.setText(result.instruction)
+            }
+        }
+        Thread.sleep(1800L)
+        return result
+    }
 
     companion object {
 
@@ -118,7 +135,7 @@ class DetailsFragment : Fragment() {
         fun openFragment(item: ListViewModel): Fragment {
             val fragment = DetailsFragment()
             val bundle = bundleOf(
-                ITEM_KEY = item)
+                ID_KEY to item.id)
             fragment.arguments = bundle
             return fragment
         }

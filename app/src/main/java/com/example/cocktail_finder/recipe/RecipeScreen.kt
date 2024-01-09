@@ -1,5 +1,7 @@
 package com.example.cocktail_finder.recipe
 
+import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +20,15 @@ import com.example.cocktail_finder.dataModels.IngredientModel
 import kotlinx.coroutines.NonDisposableHandle.parent
 import kotlinx.coroutines.flow.StateFlow
 
+//class RecipeScreen : ComponentActivity() {
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//        setContent {
+//            IngredientCard()
+//        }
+//    }
+//}
 @OptIn(ExperimentalMaterial3Api::class)
 //@Composable
 //class RecipeScreen (
@@ -47,9 +58,8 @@ import kotlinx.coroutines.flow.StateFlow
 //
 //    )
 //}
-
 @Composable
-public fun IngredientCard(item: IngredientModel) {
+public fun IngredientCard(item: IngredientModel?) {
     Row(
         modifier = Modifier
             .height(12.dp)
@@ -61,16 +71,16 @@ public fun IngredientCard(item: IngredientModel) {
                 .fillMaxWidth()
                 .padding(12.dp)
         ) {
-            val (title, ingredients) = createRefs()
+            val (measure, ingredient) = createRefs()
             Text(
-                text = item.title,
-                modifier = Modifier.constrainAs(title) {
+                text = item!!.ingredient,
+                modifier = Modifier.constrainAs(ingredient) {
                     start.linkTo(parent.start)
                 }
             )
             Text(
-                text = item.ingredients,
-                modifier = Modifier.constrainAs(ingredients) {
+                text = item.measure,
+                modifier = Modifier.constrainAs(measure) {
                     end.linkTo(parent.end)
                 }
             )
@@ -84,5 +94,14 @@ fun IngredientsList(list: List<IngredientModel>) {
         list.forEach {
             IngredientCard(item = it)
         }
+    }
+}
+
+@Composable
+fun Instruction(str: String) {
+    Row(){
+        Text(
+            text = str
+        )
     }
 }
