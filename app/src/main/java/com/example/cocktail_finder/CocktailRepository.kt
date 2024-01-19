@@ -82,10 +82,10 @@ class CocktailRepository {
         return null
     }
 
-    suspend fun searchCocktailById(idDrink: String?): DetailsModel? {
+    fun searchCocktailById(idDrink: String?): DetailsModel? {
         val request = Request.Builder()
-            .url("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11728")
-//            .url(SEARCH_BY_ID + idDrink)
+//            .url("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11728")
+            .url(SEARCH_BY_ID + idDrink)
             .build()
         try {
             val response = client.newCall(request).execute()
