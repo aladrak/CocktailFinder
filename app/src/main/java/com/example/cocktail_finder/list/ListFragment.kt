@@ -25,7 +25,7 @@ import kotlinx.coroutines.withContext
 
 class ListFragment : Fragment() {
     data class ListState(
-        val list: List<ListViewModel> = listOf(ListViewModel("", "")),
+        val list: List<ListViewModel> = listOf(ListViewModel("", "", {})),
         val text: String = ""
     )
     private val state = MutableStateFlow(ListState())
@@ -58,6 +58,21 @@ class ListFragment : Fragment() {
                     scope.launch {
                         val result = repository.searchCocktail(it)
                         result?.let {
+                            if (result[0].id != "-1") {
+                                result.forEach {
+                                    it.onClickAction = {
+                                        requireActivity()
+                                            .supportFragmentManager
+                                            .beginTransaction()
+                                            .replace(
+                                                R.id.container,
+                                                DetailsFragment.openFragment(it)
+                                            )
+                                            .addToBackStack(DetailsFragment::class.java.canonicalName)
+                                            .commit()
+                                    }
+                                }
+                            }
                             withContext(Dispatchers.Main) {
                                 state.emit(
                                     ListState(

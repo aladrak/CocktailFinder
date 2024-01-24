@@ -27,15 +27,17 @@ class CocktailRepository {
                     resultList.add(
                         ListViewModel(
                             item.getString("idDrink"),
-                            item.getString("strDrink")
+                            item.getString("strDrink"),
+                            {}
                         )
                     )
                 }
             } else {
                 resultList.add(
                     ListViewModel(
-                        "",
-                        "No results!"
+                        "-1",
+                        "No results!",
+                        {}
                     )
                 )
             }
@@ -62,7 +64,8 @@ class CocktailRepository {
                     resultList.add(
                         ListViewModel(
                             item.getString("idDrink"),
-                            item.getString("strDrink")
+                            item.getString("strDrink"),
+                            {}
                         )
                     )
                 }
@@ -70,7 +73,8 @@ class CocktailRepository {
                 resultList.add(
                     ListViewModel(
                         "",
-                        "No results!"
+                        "No results!",
+                        {}
                     )
                 )
             }
