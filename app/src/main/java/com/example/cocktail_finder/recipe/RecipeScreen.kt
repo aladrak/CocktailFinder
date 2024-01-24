@@ -1,7 +1,5 @@
 package com.example.cocktail_finder.recipe
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -32,7 +31,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.cocktail_finder.dataModels.DetailsModel
 import com.example.cocktail_finder.dataModels.IngredientModel
-import kotlinx.coroutines.NonDisposableHandle.parent
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 //class RecipeScreen : ComponentActivity() {
@@ -73,7 +72,11 @@ import kotlinx.coroutines.flow.StateFlow
 //
 //    )
 //}
-
+//@Preview
+//@Composable
+//fun RecipeScreenPreview() {
+//    RecipeScreen(model = state)
+//}
 @Composable
 fun RecipeScreen(
     model: StateFlow<DetailsFragment.State>
