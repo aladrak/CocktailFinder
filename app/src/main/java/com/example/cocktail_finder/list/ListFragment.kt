@@ -4,19 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.cocktail_finder.CocktailRepository
-import com.example.cocktail_finder.recipe.DetailsFragment
+import com.example.cocktail_finder.utils.CocktailRepository
+import com.example.cocktail_finder.recipe.RecipeFragment
 import com.example.cocktail_finder.R
-import com.example.cocktail_finder.dataModels.DetailsModel
-import com.example.cocktail_finder.dataModels.IngredientModel
 import com.example.cocktail_finder.dataModels.ListViewModel
-import com.example.cocktail_finder.recipe.RecipeScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,15 +27,6 @@ class ListFragment : Fragment() {
     private val scope = CoroutineScope(Dispatchers.IO)
 
     private var ingSearch: Boolean = false
-
-//    private val adapter = ListAdapter {item ->
-//        requireActivity()
-//            .supportFragmentManager
-//            .beginTransaction()
-//            .replace(R.id.container, DetailsFragment.openFragment(item))
-//            .addToBackStack(DetailsFragment::class.java.canonicalName)
-//            .commit()
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,9 +51,9 @@ class ListFragment : Fragment() {
                                             .beginTransaction()
                                             .replace(
                                                 R.id.container,
-                                                DetailsFragment.openFragment(it)
+                                                RecipeFragment.openFragment(it)
                                             )
-                                            .addToBackStack(DetailsFragment::class.java.canonicalName)
+                                            .addToBackStack(RecipeFragment::class.java.canonicalName)
                                             .commit()
                                     }
                                 }

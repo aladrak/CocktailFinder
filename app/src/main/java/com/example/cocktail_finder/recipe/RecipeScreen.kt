@@ -15,7 +15,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -24,25 +23,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.cocktail_finder.dataModels.DetailsModel
 import com.example.cocktail_finder.dataModels.IngredientModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.example.cocktail_finder.utils.LargeText
+import com.example.cocktail_finder.utils.Line
 import kotlinx.coroutines.flow.StateFlow
 
-//class RecipeScreen : ComponentActivity() {
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        setContent {
-//            IngredientCard()
-//        }
-//    }
-//}
 @OptIn(ExperimentalMaterial3Api::class)
 //@Composable
 //class RecipeScreen (
@@ -79,7 +68,7 @@ import kotlinx.coroutines.flow.StateFlow
 //}
 @Composable
 fun RecipeScreen(
-    model: StateFlow<DetailsFragment.State>
+    model: StateFlow<RecipeFragment.State>
 ) {
     val state by model.collectAsState()
     Column(
@@ -170,11 +159,10 @@ fun IngredientsList(list: List<IngredientModel>) {
 
 @Composable
 fun Instruction(str: String) {
-    Row(
+    Column (
         modifier = Modifier
             .wrapContentHeight()
-            .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
+            .fillMaxWidth()
     ){
         Text(
             text = str
@@ -184,34 +172,19 @@ fun Instruction(str: String) {
 
 @Composable
 fun Title(str: String) {
-    Row(
+    Column(
         modifier = Modifier
             .height(60.dp)
+            .padding(12.dp)
             .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
+        horizontalAlignment = Alignment.CenterHorizontally
+//        verticalAlignment = Alignment.CenterVertically,
     ){
-        ConstraintLayout (
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp)
-        ) {
-            val (title, line) = createRefs()
-            Text(
-                text = str,
-                modifier = Modifier.constrainAs(title) {
-                    bottom.linkTo(line.top)
-                }
-            )
-            Box(
-                modifier = Modifier
-                    .height(2.dp)
-                    .fillMaxWidth()
-                    .background(Color(0, 0, 0))
-                    .constrainAs(line) {
-                        top.linkTo(title.bottom)
-                    },
-            ) {}
-        }
+        LargeText(
+            text = str,
+            modifier = Modifier,
+        )
+        Line(2.dp)
     }
 }
 

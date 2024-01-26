@@ -1,4 +1,4 @@
-package com.example.cocktail_finder
+package com.example.cocktail_finder.utils
 
 import android.util.Log
 import com.example.cocktail_finder.dataModels.DetailsModel
