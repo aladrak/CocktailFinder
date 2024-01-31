@@ -46,7 +46,6 @@ class CocktailRepository {
             Log.e("OK_HTTP", ex.message ?: "")
             return null
         }
-        return null
     }
 
     suspend fun searchCocktailByIng(searchString: String): List<ListViewModel>? {
@@ -112,16 +111,18 @@ class CocktailRepository {
     }
 
     private fun createIngredientList(item: JSONObject): List<IngredientModel> {
-        var list = mutableListOf<IngredientModel>()
+        val list = mutableListOf<IngredientModel>()
         for (i in 1 .. 15) {
-            if (getIngredient(item, i) != "" && getMeasure(item, i) != "") {
+            if (getIngredient(item, i) != "") {
                 list.add(
                     IngredientModel(
                         ingredient = getIngredient(item, i),
                         measure = getMeasure(item, i)
                     )
                 )
-            } else {break}
+            } else {
+                break
+            }
         }
         return list
     }
@@ -132,9 +133,9 @@ class CocktailRepository {
         }
         else if (el.contains("oz", false))
         {
-            var regres1 = Regex("""(\d+)""").find(el, 0)?.value
-            var regres2 = Regex("""(\d)""").find(el, 2)?.value
-            var regres3 = Regex("""(\d)""").find(el, 4)?.value
+            val regres1 = Regex("""(\d+)""").find(el, 0)?.value
+            val regres2 = Regex("""(\d)""").find(el, 2)?.value
+            val regres3 = Regex("""(\d)""").find(el, 4)?.value
             if (regres2 != null && regres3 != null && regres1 != null) {
                 el = (regres1.toInt() * 30 + (regres2.toInt() * 30 / regres3.toInt())).toString() + " gram"
             } else if (regres1 != null) {
@@ -160,20 +161,6 @@ class CocktailRepository {
         }
         return "$i. " + item.getString("strIngredient$i")
     }
-
-//    private fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith {
-//        when (val value = this[it])
-//        {
-//            is JSONArray ->
-//            {
-//                val map = (0 until value.length()).associate { Pair(it.toString(), value[it]) }
-//                JSONObject(map).toMap().values.toList()
-//            }
-//            is JSONObject -> value.toMap()
-//            JSONObject.NULL -> null
-//            else            -> value
-//        }
-//    }
 
     companion object {
         private const val SEARCH_BY_NAME = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="

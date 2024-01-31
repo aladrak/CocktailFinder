@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.cocktail_finder.utils.CocktailRepository
 import com.example.cocktail_finder.recipe.RecipeFragment
 import com.example.cocktail_finder.R
 import com.example.cocktail_finder.dataModels.ListViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -20,13 +20,11 @@ import kotlinx.coroutines.withContext
 class ListFragment : Fragment() {
     data class ListState(
         val list: List<ListViewModel> = listOf(ListViewModel("", "", {})),
-        val text: String = ""
     )
     private val state = MutableStateFlow(ListState())
     private val repository = CocktailRepository()
-    private val scope = CoroutineScope(Dispatchers.IO)
 
-    private var ingSearch: Boolean = false
+//    private var ingSearch: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +38,7 @@ class ListFragment : Fragment() {
             ListScreen (
                 model = state,
                 onSearch = {
-                    scope.launch {
+                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
                         val result = repository.searchCocktail(it)
                         result?.let {
                             if (result[0].id != "-1") {

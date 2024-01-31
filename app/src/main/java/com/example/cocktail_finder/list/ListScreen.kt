@@ -36,14 +36,11 @@ import com.example.cocktail_finder.utils.Line
 import com.example.cocktail_finder.utils.MediumText
 import kotlinx.coroutines.flow.StateFlow
 
-@Composable
-@Preview
-fun PreviewListScreen(
-
-) {
-
-    SearchField(mutableStateOf(TextFieldValue("Test")))
-}
+//@Composable
+//@Preview
+//fun PreviewListScreen(){
+//    SearchField(mutableStateOf(TextFieldValue("Test")))
+//}
 
 @Composable
 fun ListScreen(
@@ -116,7 +113,7 @@ fun CocktailList(list: List<ListViewModel>) {
 }
 
 @Composable
-fun ListItem(item: ListViewModel, b: Boolean) {
+fun ListItem(item: ListViewModel, end: Boolean) {
     Column(
         modifier = Modifier
             .clickable {
@@ -137,17 +134,8 @@ fun ListItem(item: ListViewModel, b: Boolean) {
                 modifier = Modifier,
             )
         }
-        if (!b) {
+        if (!end) {
             Line(1.dp)
         }
     }
 }
-
-//private fun Recipe
-//        setContent {
-//            MaterialTheme(
-//                Id (
-//                    args = smth
-//                )
-//            )
-//        }
