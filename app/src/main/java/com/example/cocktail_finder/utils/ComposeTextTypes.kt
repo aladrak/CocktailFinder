@@ -46,7 +46,18 @@ fun MediumText (
     Text (
         text = text,
         modifier = modifier,
-        fontSize = 18.sp,
+        fontSize = 21.sp,
         textAlign = textAlign
+    )
+}
+@Composable
+fun SmallText (
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Text (
+        text = text,
+        modifier = modifier,
+        fontSize = 16.sp
     )
 }

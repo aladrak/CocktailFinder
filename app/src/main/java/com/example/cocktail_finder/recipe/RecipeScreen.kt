@@ -30,6 +30,7 @@ import coil.request.ImageRequest
 import com.example.cocktail_finder.dataModels.IngredientModel
 import com.example.cocktail_finder.utils.LargeText
 import com.example.cocktail_finder.utils.Line
+import com.example.cocktail_finder.utils.SmallText
 import kotlinx.coroutines.flow.StateFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -129,16 +130,16 @@ fun IngredientCard(item: IngredientModel?) {
         ConstraintLayout (
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp)
+                .padding(10.dp)
         ) {
             val (measure, ingredient) = createRefs()
-            Text(
+            SmallText(
                 text = item!!.ingredient,
                 modifier = Modifier.constrainAs(ingredient) {
                     start.linkTo(parent.start)
                 }
             )
-            Text(
+            SmallText(
                 text = item.measure,
                 modifier = Modifier.constrainAs(measure) {
                     end.linkTo(parent.end)
@@ -164,7 +165,7 @@ fun Instruction(str: String) {
             .wrapContentHeight()
             .fillMaxWidth()
     ){
-        Text(
+        SmallText(
             text = str
         )
     }
@@ -174,17 +175,18 @@ fun Instruction(str: String) {
 fun Title(str: String) {
     Column(
         modifier = Modifier
-            .height(60.dp)
-            .padding(12.dp)
+            .height(65.dp)
+            .padding(0.dp, 0.dp)
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
 //        verticalAlignment = Alignment.CenterVertically,
     ){
         LargeText(
             text = str,
-            modifier = Modifier,
+            modifier = Modifier
+                .padding(0.dp, 6.dp),
         )
-        Line(2.dp)
+        Line(1.dp)
     }
 }
 
@@ -207,7 +209,7 @@ fun Image(link: String){
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .clip(RoundedCornerShape(1))
+                    .clip(RoundedCornerShape(3))
                     .size(200.dp)
             )
         }
