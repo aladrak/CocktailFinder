@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.cocktail_finder.dataModels.IngredientModel
+import com.example.cocktail_finder.data.IngredientModel
 import com.example.cocktail_finder.utils.LargeText
 import com.example.cocktail_finder.utils.Line
 import com.example.cocktail_finder.utils.SmallText

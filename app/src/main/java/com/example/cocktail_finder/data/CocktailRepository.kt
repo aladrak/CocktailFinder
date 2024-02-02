@@ -1,9 +1,6 @@
-package com.example.cocktail_finder.utils
+package com.example.cocktail_finder.data
 
 import android.util.Log
-import com.example.cocktail_finder.dataModels.DetailsModel
-import com.example.cocktail_finder.dataModels.IngredientModel
-import com.example.cocktail_finder.dataModels.ListViewModel
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray

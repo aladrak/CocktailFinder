@@ -1,4 +1,4 @@
-package com.example.cocktail_finder.dataModels
+package com.example.cocktail_finder.data
 
 data class DetailsModel (
     val title: String,

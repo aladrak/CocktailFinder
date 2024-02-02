@@ -8,10 +8,10 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.cocktail_finder.utils.CocktailRepository
-import com.example.cocktail_finder.recipe.RecipeFragment
 import com.example.cocktail_finder.R
-import com.example.cocktail_finder.dataModels.ListViewModel
+import com.example.cocktail_finder.data.CocktailRepository
+import com.example.cocktail_finder.recipe.RecipeFragment
+import com.example.cocktail_finder.data.ListViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -49,7 +49,7 @@ class ListFragment : Fragment() {
                                             .beginTransaction()
                                             .replace(
                                                 R.id.container,
-                                                RecipeFragment.openFragment(it)
+                                                RecipeFragment.openFragment(it.id)
                                             )
                                             .addToBackStack(RecipeFragment::class.java.canonicalName)
                                             .commit()

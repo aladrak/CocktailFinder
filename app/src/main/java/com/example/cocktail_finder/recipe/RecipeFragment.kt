@@ -11,10 +11,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.cocktail_finder.utils.CocktailRepository
-import com.example.cocktail_finder.dataModels.DetailsModel
-import com.example.cocktail_finder.dataModels.IngredientModel
-import com.example.cocktail_finder.dataModels.ListViewModel
+import com.example.cocktail_finder.data.CocktailRepository
+import com.example.cocktail_finder.data.DetailsModel
+import com.example.cocktail_finder.data.IngredientModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -69,10 +68,10 @@ class RecipeFragment : Fragment() {
     companion object {
         const val ID_KEY = "ID_KEY"
 
-        fun openFragment(item: ListViewModel): Fragment {
+        fun openFragment(id: String): Fragment {
             val fragment = RecipeFragment()
             val bundle = bundleOf(
-                ID_KEY to item.id)
+                ID_KEY to id)
             fragment.arguments = bundle
             return fragment
         }

@@ -28,10 +28,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cocktail_finder.R
-import com.example.cocktail_finder.dataModels.ListViewModel
+import com.example.cocktail_finder.data.ListViewModel
 import com.example.cocktail_finder.utils.Line
 import com.example.cocktail_finder.utils.MediumText
 import kotlinx.coroutines.flow.StateFlow
